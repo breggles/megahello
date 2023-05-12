@@ -19,27 +19,27 @@ spin:
         jmp     spin;
 
 prn_str:
-        push    r2;          // str ptr
-        push    r0;          // str len
+        push    r2;                 // str ptr
+        push    r0;                 // str len
         move    r3,r2;
         ld.b    r1,cur_out_pos;     // x
         ld.b    r2,cur_out_pos+1;   // y
 prn_str_loop:
         ld.b    r0,(r3++);
         push    r3;
-        ld.b    r3,#0xA;        // line feed
+        ld.b    r3,#0xA;            // line feed
         cmp     r0,r3;
         beq     prn_str_new_row;
         jsr     prn_chr;
         ld.b    r3,#7;
-        cmp     r1,r3;          // 8 chars in a row
+        cmp     r1,r3;              // 8 chars in a row
         beq     prn_str_new_row;
         addq    r1,#1;
         jmp     prn_str_same_row_or_grid;
 prn_str_new_row:
         clr     r1;
         ld.b    r3,#9;
-        cmp     r2,r3;          // 10 rows in the grid
+        cmp     r2,r3;              // 10 rows in the grid
         beq     prn_str_new_grid;
         addq    r2,#1;
         jmp     prn_str_same_row_or_grid;
