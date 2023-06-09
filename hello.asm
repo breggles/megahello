@@ -11,9 +11,13 @@ CHAR_BYTE_WIDTH     equ 0x10;
         ld.w    r0,#EXT_RAM_LEN-1;  // -1 to avoid signed maths confusion
         move    sp,r0;
 
+hello_str:
+        dm      "Hello, Mega-World!";
+
         ld.w    r2,#hello_str;      // str ptr
         ld.b    r0,#18;             // str len
         jsr     prn_str;
+
 spin:
         nop;
         jmp     spin;
@@ -110,9 +114,6 @@ prn_chr_done:
         pop     r1;
         pop     r2;
         ret;
-
-hello_str:
-        dm      "Hello, Mega-World!";
 
 cur_out_pos:
         db      0;          // x
